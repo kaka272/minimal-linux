@@ -19,3 +19,6 @@ find . | cpio -o -H newc | gzip > root.cpio.gz
 
 # run qemu
 qemu-system-x86_64 -nographic -no-reboot -kernel bzImage -initrd initrd/root.cpio.gz -append "panic=1 console=ttyS0"
+
+# reference
+https://github.com/maksimKorzh/cmk-linux.git
