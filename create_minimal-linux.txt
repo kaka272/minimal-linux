@@ -22,3 +22,4 @@ qemu-system-x86_64 -nographic -no-reboot -kernel bzImage -initrd initrd/root.cpi
 
 # reference
 https://github.com/maksimKorzh/cmk-linux.git
+https://phoenixnap.com/kb/build-linux-kernel
