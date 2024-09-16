@@ -1,1 +1,21 @@
+# setup env 
+docker pull ubuntu:22.04
+docker run -it ubuntu:22.04
+sudo apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
 
+# download kernel source
+git clone linux_kernel
+make defconfig
+make -j $(nproc)
+
+# download busybox
+git clone busybox
+static_make=y
+make defconfig
+make -j $(nproc)
+
+# make root filesystem
+find . | cpio -o -H newc | gzip > root.cpio.gz
+
+# run qemu
+qemu-system-x86_64 -nographic -no-reboot -kernel bzImage -initrd initrd/root.cpio.gz -append "panic=1 console=ttyS0"
